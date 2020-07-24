@@ -57,7 +57,7 @@ def MoCo(pretrained=False, **kwargs):
         model = nn.DataParallel(model)
         url = 'https://www.dropbox.com/sh/87d24jqsl6ra7t2/AAB53yJAYuCrOFluygBsVKOOa/MoCo.pth?dl=1'
         state_dict = torch.hub.load_state_dict_from_url(url)
-        model.load_state_dict(state_dict["model"])
+        model.load_state_dict(state_dict["model_ema"])
     return model
 
 
@@ -76,7 +76,7 @@ def MoCoV2(pretrained=False, **kwargs):
         model = nn.DataParallel(model)
         url = 'https://www.dropbox.com/sh/87d24jqsl6ra7t2/AABaYuKiiZFYowa31yKeGGOQa/MoCov2.pth?dl=1'
         state_dict = torch.hub.load_state_dict_from_url(url)
-        model.load_state_dict(state_dict["model"])
+        model.load_state_dict(state_dict["model_ema"])
     return model
 
 def PIRL(pretrained=False, **kwargs):
@@ -111,6 +111,6 @@ def InfoMin(pretrained=False, **kwargs):
         model = nn.DataParallel(model)
         url = 'https://www.dropbox.com/sh/87d24jqsl6ra7t2/AABc8rLe91MlYOmTRgz4dO7Ja/InfoMin_800_run2.pth?dl=1'
         state_dict = torch.hub.load_state_dict_from_url(url)
-        model.load_state_dict(state_dict["model"])
+        model.load_state_dict(state_dict["model_ema"])
     return model
 
