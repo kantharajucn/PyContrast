@@ -71,7 +71,6 @@ def CMC(pretrained=False, **kwargs):
     model = CMCSingleHead(**kwargs)
 
     if pretrained:
-        model = nn.DataParallel(model)
         url = 'https://www.dropbox.com/sh/87d24jqsl6ra7t2/AACYcqgM-lcG3__QIbxuM2Koa/CMC.pth?dl=1'
         device = torch.device("cpu")
         state_dict = torch.hub.load_state_dict_from_url(url, map_location=device)
@@ -90,7 +89,6 @@ def MoCo(pretrained=False, **kwargs):
     model = RGBSingleHead(**kwargs)
 
     if pretrained:
-        model = nn.DataParallel(model)
         url = 'https://www.dropbox.com/sh/87d24jqsl6ra7t2/AAB53yJAYuCrOFluygBsVKOOa/MoCo.pth?dl=1'
         device = torch.device("cpu")
         state_dict = torch.hub.load_state_dict_from_url(url, map_location=device)
@@ -110,7 +108,6 @@ def MoCoV2(pretrained=False, **kwargs):
     model = RGBSingleHead(**kwargs)
 
     if pretrained:
-        model = nn.DataParallel(model)
         url = 'https://www.dropbox.com/sh/87d24jqsl6ra7t2/AABaYuKiiZFYowa31yKeGGOQa/MoCov2.pth?dl=1'
         device = torch.device("cpu")
         state_dict = torch.hub.load_state_dict_from_url(url, map_location=device)
@@ -129,7 +126,6 @@ def PIRL(pretrained=False, **kwargs):
     model = RGBSingleHead(**kwargs)
 
     if pretrained:
-        model = nn.DataParallel(model)
         url = 'https://www.dropbox.com/sh/87d24jqsl6ra7t2/AADN4jKnvTI0U5oT6hTmQZz8a/PIRL.pth?dl=1'
         device = torch.device("cpu")
         state_dict = torch.hub.load_state_dict_from_url(url, map_location=device)
@@ -143,14 +139,15 @@ def InfoMin(pretrained=False, **kwargs):
     :param kwargs:
     :return:
     """
-    from pycontrast.networks.build_backbone import RGBSingleHead
-    model = RGBSingleHead(**kwargs)
+    from pycontrast.networks.build_backbone import RGBMultiHeads
+    model = RGBMultiHeads(**kwargs)
 
     if pretrained:
-        model = nn.DataParallel(model)
         url = 'https://www.dropbox.com/sh/87d24jqsl6ra7t2/AAAzMTynP3Qc8mIE4XWkgILUa/InfoMin_800.pth?dl=1'
-        state_dict = torch.hub.load_state_dict_from_url(url)
-        print(state_dict.keys())
-        model.load_state_dict(state_dict["model"])
+        device = torch.device("cpu")
+        state_dict = torch.hub.load_state_dict_from_url(url, map_location=device)
+        model = _load_encoder_weights(model, modal="RGB", state=state_dict["model"])
     return model
 
+if __name__ == "__main__":
+    InfoMin(pretrained=True)
