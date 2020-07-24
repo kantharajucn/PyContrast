@@ -114,7 +114,7 @@ def InfoMin(pretrained=False, **kwargs):
 
     if pretrained:
         model = nn.DataParallel(model)
-        url = 'https://www.dropbox.com/sh/87d24jqsl6ra7t2/AABc8rLe91MlYOmTRgz4dO7Ja/InfoMin_800.pth?dl=1'
+        url = 'https://www.dropbox.com/sh/87d24jqsl6ra7t2/AAAzMTynP3Qc8mIE4XWkgILUa/InfoMin_800.pth?dl=1'
         state_dict = torch.hub.load_state_dict_from_url(url)
         print(state_dict.keys())
         model.load_state_dict(state_dict["model"])
