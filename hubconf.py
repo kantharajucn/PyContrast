@@ -1,11 +1,7 @@
 from collections import OrderedDict
-
-import torch.nn as nn
 import torch
 
-
 dependencies = ['torch']
-
 
 def _load_encoder_weights(model, modal, state):
     """load pre-trained weights for encoder
@@ -149,5 +145,3 @@ def InfoMin(pretrained=False, **kwargs):
         model = _load_encoder_weights(model, modal="RGB", state=state_dict["model"])
     return model
 
-if __name__ == "__main__":
-    InfoMin(pretrained=True)
