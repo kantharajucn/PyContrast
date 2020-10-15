@@ -3,6 +3,7 @@ import torch
 
 dependencies = ['torch']
 
+
 def _load_encoder_weights(model, modal, state):
     """load pre-trained weights for encoder
 
@@ -55,6 +56,7 @@ def InsDis(pretrained=False, **kwargs):
         model = _load_encoder_weights(model, modal="RGB", state=state_dict["model"])
     return model
 
+
 def CMC(pretrained=False, **kwargs):
     """
     Contrastive Multiview Coding
@@ -63,8 +65,8 @@ def CMC(pretrained=False, **kwargs):
     :return:
     """
 
-    from pycontrast.networks.build_backbone import CMCSingleHead
-    model = CMCSingleHead(**kwargs)
+    from pycontrast.networks.build_backbone import CMCMultiHeads
+    model = CMCMultiHeads(**kwargs)
 
     if pretrained:
         url = 'https://www.dropbox.com/sh/87d24jqsl6ra7t2/AACYcqgM-lcG3__QIbxuM2Koa/CMC.pth?dl=1'
@@ -72,6 +74,7 @@ def CMC(pretrained=False, **kwargs):
         state_dict = torch.hub.load_state_dict_from_url(url, map_location=device)
         model = _load_encoder_weights(model, modal="CMC", state=state_dict["model"])
     return model
+
 
 def MoCo(pretrained=False, **kwargs):
     """
@@ -110,6 +113,7 @@ def MoCoV2(pretrained=False, **kwargs):
         model = _load_encoder_weights(model, modal="RGB", state=state_dict["model"])
     return model
 
+
 def PIRL(pretrained=False, **kwargs):
     """
     Self-Supervised Learning of Pretext-Invariant Representations
@@ -128,6 +132,7 @@ def PIRL(pretrained=False, **kwargs):
         model = _load_encoder_weights(model, modal="RGB", state=state_dict["model"])
     return model
 
+
 def InfoMin(pretrained=False, **kwargs):
     """
     What Makes for Good Views for Contrastive Learning?
@@ -144,4 +149,3 @@ def InfoMin(pretrained=False, **kwargs):
         state_dict = torch.hub.load_state_dict_from_url(url, map_location=device)
         model = _load_encoder_weights(model, modal="RGB", state=state_dict["model"])
     return model
-
