@@ -72,7 +72,7 @@ def CMC(pretrained=False, **kwargs):
         url = 'https://www.dropbox.com/sh/87d24jqsl6ra7t2/AACYcqgM-lcG3__QIbxuM2Koa/CMC.pth?dl=1'
         device = torch.device("cpu")
         state_dict = torch.hub.load_state_dict_from_url(url, map_location=device)
-        model = _load_encoder_weights(model, modal="CMC", state=state_dict["model"])
+        model = _load_encoder_weights(model, modal="RGB", state=state_dict["model"])
     return model
 
 
