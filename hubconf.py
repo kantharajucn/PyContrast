@@ -65,8 +65,8 @@ def CMC(pretrained=False, **kwargs):
     :return:
     """
 
-    from pycontrast.networks.build_backbone import CMCMultiHeads
-    model = CMCMultiHeads(**kwargs)
+    from pycontrast.networks.build_backbone import RGBSingleHead
+    model = RGBSingleHead(**kwargs)
 
     if pretrained:
         url = 'https://www.dropbox.com/sh/87d24jqsl6ra7t2/AACYcqgM-lcG3__QIbxuM2Koa/CMC.pth?dl=1'
